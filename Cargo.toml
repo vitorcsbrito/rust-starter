@@ -1,0 +1,7 @@
+[workspace]
+resolver = "2"
+members = [
+    "starter-api",
+    "starter-common",
+    "starter-data",
+    "starter-rest"]
