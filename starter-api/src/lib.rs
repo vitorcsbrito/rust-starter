@@ -1,1 +1,1 @@
-pub fn smt() {}
+pub mod post;

@@ -1,5 +1,5 @@
 
-use rocket::serde::{Deserialize, Serialize};
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, PartialEq, Eq, Serialize)]
 pub struct PostObj {

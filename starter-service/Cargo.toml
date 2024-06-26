@@ -1,0 +1,8 @@
+[package]
+name = "starter-service"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+starter-data = { path = "../starter-data" }
+starter-api = { path = "../starter-api" }

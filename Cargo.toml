@@ -4,4 +4,5 @@ members = [
     "starter-api",
     "starter-common",
     "starter-data",
+    "starter-service",
     "starter-rest"]

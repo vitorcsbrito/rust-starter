@@ -6,6 +6,7 @@
       <sourceFolder url="file://$MODULE_DIR$/starter-common/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/starter-data/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/starter-rest/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/starter-service/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/pgdata" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>

@@ -6,7 +6,6 @@ use crate::routes::get_requests::{get_all_posts, get_posts};
 use crate::routes::post_requests::create_post;
 
 mod routes;
-mod model;
 
 #[launch]
 fn rocket() -> _ {
