@@ -1,6 +1,8 @@
 use crate::db::establish_connection;
 use crate::models::post::{NewPost, Post};
 use diesel::prelude::*;
+use crate::schema::posts::dsl::posts;
+use crate::schema::posts::id;
 
 pub fn get_posts() -> Vec<Post> {
     use super::schema::posts::dsl::*;
@@ -9,6 +11,19 @@ pub fn get_posts() -> Vec<Post> {
     let results = posts
         .filter(published.eq(true))
         .limit(5)
+        .select(Post::as_select())
+        .load(connection)
+        .expect("Error loading posts");
+
+    println!("Displaying {} posts", results.len());
+    results
+}
+
+pub fn get_all_posts() -> Vec<Post> {
+    use super::schema::posts::dsl::*;
+
+    let connection = &mut establish_connection();
+    let results = posts
         .select(Post::as_select())
         .load(connection)
         .expect("Error loading posts");
@@ -32,4 +47,14 @@ pub fn create_post(title: &str, body: &str) -> Post {
         .returning(Post::as_returning())
         .get_result(conn)
         .expect("Error saving new post")
+}
+
+pub fn delete_post(post_id: i32)  {
+    use super::schema::posts;
+
+    let conn = &mut establish_connection();
+    diesel::delete(posts::table)
+        .filter(id.eq(post_id))
+        .execute(conn)
+        .expect("Error saving new post");
 }
