@@ -1,7 +1,5 @@
-use std::env::var;
 use rocket::serde::json::Json;
 use rocket::serde::Serialize;
-use rocket::yansi::Paint;
 
 #[derive(Debug, PartialEq, Eq, Serialize)]
 pub struct PostObj {
@@ -14,7 +12,7 @@ pub struct PostObj {
 #[get("/")]
 pub fn get_posts() -> Json<Vec<PostObj>> {
     println!("Getting posts...");
-    let posts = starter_data::service::get_posts();
+    let posts = starter_data::post_service::get_posts();
 
     let mut res: Vec<PostObj> = Vec::new();
 

@@ -1,7 +1,5 @@
-mod schema;
-mod models;
 mod db;
+mod models;
+mod schema;
 
-pub mod service;
-
-
+pub mod post_service;

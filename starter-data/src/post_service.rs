@@ -1,9 +1,8 @@
-
-use diesel::prelude::*;
 use crate::db::establish_connection;
 use crate::models::post::{NewPost, Post};
+use diesel::prelude::*;
 
-pub fn get_posts()  -> Vec<Post>{
+pub fn get_posts() -> Vec<Post> {
     use super::schema::posts::dsl::*;
 
     let connection = &mut establish_connection();
@@ -21,7 +20,11 @@ pub fn get_posts()  -> Vec<Post>{
 pub fn create_post(title: &str, body: &str) -> Post {
     use super::schema::posts;
 
-    let new_post = NewPost { title, body, published: &true };
+    let new_post = NewPost {
+        title,
+        body,
+        published: &true,
+    };
 
     let conn = &mut establish_connection();
     diesel::insert_into(posts::table)

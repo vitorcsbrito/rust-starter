@@ -1,6 +1,6 @@
+use crate::schema::posts;
 use diesel::prelude::*;
 use diesel::Insertable;
-use crate::schema::posts;
 
 #[derive(Queryable, Selectable)]
 #[diesel(table_name = crate::schema::posts)]

@@ -1,6 +1,6 @@
-use rocket::serde::{Deserialize, Serialize};
 use rocket::serde::json::Json;
-use starter_data::service;
+use rocket::serde::{Deserialize, Serialize};
+use starter_data::post_service;
 
 #[derive(Debug, PartialEq, Eq, Deserialize)]
 pub struct CreatePost {
@@ -22,7 +22,12 @@ pub fn create_post(post: Json<CreatePost>) -> Json<PostObj> {
 
     format!("print test {:?}", post);
 
-    let post = service::create_post(post.title.as_str(), post.body.as_str());
+    let post = post_service::create_post(post.title.as_str(), post.body.as_str());
 
-    Json(PostObj { id: post.id, title: post.title, body: post.body, published: post.published })
+    Json(PostObj {
+        id: post.id,
+        title: post.title,
+        body: post.body,
+        published: post.published,
+    })
 }
