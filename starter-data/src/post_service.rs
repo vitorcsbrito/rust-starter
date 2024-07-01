@@ -1,7 +1,7 @@
+use diesel::prelude::*;
+
 use crate::db::establish_connection;
 use crate::models::post::{NewPost, Post};
-use diesel::prelude::*;
-use crate::schema::posts::dsl::posts;
 use crate::schema::posts::id;
 
 pub fn get_posts() -> Vec<Post> {
@@ -49,7 +49,7 @@ pub fn create_post(title: &str, body: &str) -> Post {
         .expect("Error saving new post")
 }
 
-pub fn delete_post(post_id: i32)  {
+pub fn delete_post(post_id: i32) {
     use super::schema::posts;
 
     let conn = &mut establish_connection();
@@ -57,4 +57,11 @@ pub fn delete_post(post_id: i32)  {
         .filter(id.eq(post_id))
         .execute(conn)
         .expect("Error saving new post");
+}
+
+pub fn find_post<'a>(post_id: i32) -> Result<Post, diesel::result::Error> {
+    use super::schema::posts::dsl::*;
+
+    let conn = &mut establish_connection();
+    posts.find(post_id).first::<Post>(conn)
 }

@@ -1,5 +1,6 @@
 use starter_api::post::{CreatePost, PostObj};
 use starter_data::post_service;
+use std::error::Error;
 
 pub fn get_posts() -> Vec<PostObj> {
     println!("Getting posts...");
@@ -44,7 +45,7 @@ pub fn get_all_posts() -> Vec<PostObj> {
 pub fn create_post(post: CreatePost) -> PostObj {
     println!("Creating post...");
 
-    let post = post_service::create_post(post.title.as_str(), post.body.as_str());
+    let post = post_service::create_post(&*post.title, &*post.body);
 
     PostObj {
         id: post.id,
@@ -54,8 +55,14 @@ pub fn create_post(post: CreatePost) -> PostObj {
     }
 }
 
-pub fn delete_post(id: i32) {
+pub fn delete_post(id: i32) -> Result<i32, impl Error> {
     println!("Deleting post...");
 
-    post_service::delete_post(id);
+    match post_service::find_post(id) {
+        Ok(p) => {
+            post_service::delete_post(p.id);
+            Ok(p.id)
+        }
+        Err(err) => Err(err),
+    }
 }
